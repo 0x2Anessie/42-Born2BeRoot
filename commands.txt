@@ -1,1 +1,99 @@
 // Commandes nécessaires à la correction du projet Born2BeRoot et leurs utilités //
+
+      Général & OS
+* Générer la signature d'un fichier *.vdi --> shasum born2beroot.vdi
+* Montrer le système d'exploitation utilisé --> head -n 2 /etc/os-release
+* Montrer que le système UFW est bien lancé --> sudo ufw status
+* Montrer que le système SSH est bien lancé --> sudo service ssh status ET/OU systemctl status ssh
+
+      Utilisateur et groupe
+* Vérifier que j'ai un compte dans ma VM et qu'il est bien dans les groupes "user42" et "sudo" --> getent group user42
+                                                                                               --> getent group sudo
+
+* Créer un nouvel utilisateur (intra correcteur + 42) --> sudo adduser intra42    // tenter de mettre un mdp incorrect puis correct
+* Vérifier qu'il a bien été créé --> getent passwd intra42
+* Montrer le fichier modifié pour les limites de temps relatives aux mdp --> sudo vi /etc/login.defs
+                                                                             -> ligne 160, 161 et 162
+* Montrer le fichier modifié pour la gestion de mdp incorrects --> sudo vi /etc/pam.d/common-password
+                                                                   -> ligne 25
+
+* Créer le groupe "evaluating" --> sudo addgroup evaluating
+* Y ajouter le nouvel utilisateur --> sudo adduser intra42 evaluating
+* Vérifier qu'il est bien dans le nouveau groupe --> getent group evaluating
+* 
+      Hostname et partitions
+* Vérifiez que le hostname de la machine est bien formatté --> cat /etc/hostname
+* Modifier le hostname en remplaçant mon login par celui du correcteur --> sudo vim /etc/hostname
+* Reboot la VM --> sudo reboot
+* Vérifiez que le hostname de la machine a bien été modifié --> cat /etc/hostname
+* Remettre le hostname de base --> sudo vim /etc/hostname
+* Reboot la VM --> sudo reboot
+
+* Afficher les partitions de la VM --> lsblk
+
+      Sudo
+* Vérifiez que le programme "sudo" est bien installé sur la VM --> dpkg -l | grep sudo
+* Assigner le nouvel utilisateur à "sudo" --> sudo adduser intra42 sudo
+* Vérifier qu'il est bien dans le groupe "sudo" --> getent group sudo
+
+* Montrer la mise en place des règles pour "sudo" --> sudo vi /etc/sudoers.d/configsudo
+                                                      -> ligne : Defaults        passwd_tries=3    // pour les 3 tentatives de mdp
+                                                      -> ligne : Defaults        badpass_message="<custom-error-message>"
+
+* Passer en root --> su -
+* Vérifier que le dossier /var/log/sudo/ existe --> cd /var/log/sudo
+* Vérifiez qu'il possède au moins un fichier --> ls
+* Montrer que ce fichier est l'historique des cmd sudo --> cat <filename>
+* Faire une cmd sudo --> sudo touch pouet
+* Vérifier que l'historique est à jour --> cat <filename>
+* Sortir du mode root --> exit
+
+      UFW
+* Vérifiez que le programme "UFW" est bien installé sur la VM --> dpkg -l | grep ufw
+* Vérifiez qu'il fonctionne correctement --> sudo ufw status
+
+* Ouvrir le port 8080 --> sudo ufw allow 8080
+* Montrer qu'il est bien ajouté --> sudo ufw status
+* Le supprimer --> sudo ufw delete allow 8080
+
+      SSH
+* Vérifiez que le programme "SSH" est bien installé sur la VM --> dpkg -l | grep ssh
+* Vérifiez qu'il fonctionne correctement --> sudo service ssh status
+
+Dans le terminal : * Vérifiez que le service SSH utilise uniquement le port 4242 --> ssh -p 4242 acatusse42@127.0.0.1
+                   * Sortir --> exit
+                   * Essayer avec le nouvel utilisateur --> ssh -p 4242 intra42@127.0.0.1
+                   * Sortir --> exit
+                   * Essayer avec root --> ssh -p 4242 root@127.0.0.1
+                   
+      Script monitoring
+* Afficher le code du script --> sudo vim /usr/local/bin/monitoring.sh
+
+Explication du script : * uname : affiche les informations système sur la machine sur laquelle elle est exécutée
+                        * grep : cherche la chaîne de caractères choisie à l'intérieur des fichiers ou des répertoires spécifiés et affiche                                  les lignes correspondantes
+                        * sort : permet de trier des fichiers ou leurs contenus
+                        * uniq : affiche les lignes d'un fichier texte en supprimant les multiples occurrences consécutives d'une même                                        ligne
+                        * wc : permet d'obtenir plusieurs informations au sujet de l'entrée standard ou d'une liste de fichiers | wc -l                                    affiche le nombre de ligne
+                        * free : permet d'afficher des informations de disponibilité sur la mémoire vive du système
+                        * awk : permet une recherche de chaîne et l'exécution d'action sur les lignes sélectionnées. Elle est utile pour                                     récuperer de l'information, générer des rapports, transformer des données entre autres.
+                        * df :  permet d'afficher la valeur d'espace disque disponible des systèmes de fichier dont l'utilisateur possède                                   l'accès en lecture
+                        * top : permet d'afficher en temps réel la liste des processus et les ressources utilisées. (= gestionnaire des                                     tâches)
+                        * who : permet d'afficher des informations concernant des utilisateurs qui sont connectés
+                        * netstat : permet d'afficher des informations sur les connections réseau, les tables de routage et un certain                                           nombre de statistiques dont ceux des interfaces, sans oublier les connexions masquées, les membres                                           multicast, et enfin, les messages netlink
+                        * hostname : permet de définir ou d'afficher le nom du système hôte en cours
+                        * ip a : permet d'obtenir des informations sur les interfaces réseaux
+                        * echo : permet d'afficher une chaine de caractères passée en paramètre sur le terminal
+                        * wall : abréviation de write to all qui permet d'afficher un message à tous les utilisateurs connectés
+                        
+* Passer root --> su -
+* Montrer comment executer le script toutes les 10mins --> crontab -e 
+* Remplacer les 10mins par 1min --> */10 par */1
+                                    -> ligne 23
+* Réouvrir le script --> crontab -e
+* Faire en sorte que le script arrête de s'éxecuter --> Ajouter '#' devant la ligne
+* Reboot
+* Vérifier que le script existe toujours au même endroit et que ses droits sont restés inchangés --> ls- l /usr/local/bin/monitoring
+                        
+// Bonus //
+
+* Afficher les partitions de la VM --> lsblk
