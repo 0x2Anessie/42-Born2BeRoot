@@ -43,9 +43,9 @@
 * Passer en root --> su -
 * Vérifier que le dossier /var/log/sudo/ existe --> cd /var/log/sudo
 * Vérifiez qu'il possède au moins un fichier --> ls
-* Montrer que ce fichier est l'historique des cmd sudo --> cat <filename>
+* Montrer que ce fichier est l'historique des cmd sudo --> cat cmdsudo
 * Faire une cmd sudo --> sudo touch pouet
-* Vérifier que l'historique est à jour --> cat <filename>
+* Vérifier que l'historique est à jour --> cat cmdsudo
 * Sortir du mode root --> exit
 
       UFW
