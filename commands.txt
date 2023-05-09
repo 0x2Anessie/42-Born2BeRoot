@@ -60,7 +60,7 @@
 * Vérifiez que le programme "SSH" est bien installé sur la VM --> dpkg -l | grep ssh
 * Vérifiez qu'il fonctionne correctement --> sudo service ssh status
 
-Dans le terminal : * Vérifiez que le service SSH utilise uniquement le port 4242 --> ssh -p 4242 acatusse42@127.0.0.1
+Dans le terminal : * Vérifiez que le service SSH utilise uniquement le port 4242 --> ssh -p 4242 acatusse@127.0.0.1
                    * Sortir --> exit
                    * Essayer avec le nouvel utilisateur --> ssh -p 4242 intra42@127.0.0.1
                    * Sortir --> exit
