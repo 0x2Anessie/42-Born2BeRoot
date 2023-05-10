@@ -67,7 +67,8 @@ Dans le terminal : * Vérifiez que le service SSH utilise uniquement le port 424
                    * Essayer avec root --> ssh -p 4242 root@127.0.0.1
                    
       Script monitoring
-* Afficher le code du script --> sudo vim /usr/local/bin/monitoring.sh
+* Afficher le code du script --> cd script/
+                             --> sudo vi monitoring.sh
 
 Explication du script : * uname : affiche les informations système sur la machine sur laquelle elle est exécutée
                         * grep : cherche la chaîne de caractères choisie à l'intérieur des fichiers ou des répertoires spécifiés et affiche                                  les lignes correspondantes
