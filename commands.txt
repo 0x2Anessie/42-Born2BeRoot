@@ -20,7 +20,7 @@
 * Créer le groupe "evaluating" --> sudo addgroup evaluating
 * Y ajouter le nouvel utilisateur --> sudo adduser intra42 evaluating
 * Vérifier qu'il est bien dans le nouveau groupe --> getent group evaluating
-* 
+
       Hostname et partitions
 * Vérifiez que le hostname de la machine est bien formatté --> cat /etc/hostname
 * Modifier le hostname en remplaçant mon login par celui du correcteur --> sudo vim /etc/hostname
@@ -93,7 +93,7 @@ Explication du script : * uname : affiche les informations système sur la machi
 * Réouvrir le script --> crontab -e
 * Faire en sorte que le script arrête de s'éxecuter --> Ajouter '#' devant la ligne
 * Reboot
-* Vérifier que le script existe toujours au même endroit et que ses droits sont restés inchangés --> ls- l /usr/local/bin/monitoring
+* Vérifier que le script existe toujours au même endroit et que ses droits sont restés inchangés --> ls- l /home/acatusse/script
                         
 // Bonus //
 
