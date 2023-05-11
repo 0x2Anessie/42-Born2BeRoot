@@ -20,6 +20,7 @@
 * Créer le groupe "evaluating" --> sudo addgroup evaluating
 * Y ajouter le nouvel utilisateur --> sudo adduser intra42 evaluating
 * Vérifier qu'il est bien dans le nouveau groupe --> getent group evaluating
+* Supprimer le groupe evaluating --> sudo groupdel evaluating
 
       Hostname et partitions
 * Vérifiez que le hostname de la machine est bien formatté --> cat /etc/hostname
