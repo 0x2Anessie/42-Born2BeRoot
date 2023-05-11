@@ -2,6 +2,7 @@
 
       Général & OS
 * Générer la signature d'un fichier *.vdi --> shasum born2beroot.vdi
+
 * Montrer le système d'exploitation utilisé --> head -n 2 /etc/os-release
 * Montrer que le système UFW est bien lancé --> sudo ufw status
 * Montrer que le système SSH est bien lancé --> sudo service ssh status ET/OU systemctl status ssh
