@@ -47,6 +47,7 @@
 * Vérifiez qu'il possède au moins un fichier --> ls
 * Montrer que ce fichier est l'historique des cmd sudo --> cat cmdsudo
 * Faire une cmd sudo --> sudo touch pouet
+* Supprimer "pouet" --> rm pouet
 * Vérifier que l'historique est à jour --> cat cmdsudo
 * Sortir du mode root --> exit
 
